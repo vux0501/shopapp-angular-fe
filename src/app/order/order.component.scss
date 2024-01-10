@@ -1,0 +1,37 @@
+.container {
+  color: black;
+}
+.info-form {
+  margin: 50px 0px 500px 0px;
+}
+
+table {
+  width: 100%;
+  border-radius: 10px;
+  border: none;
+  border: 2px solid black;
+  border-spacing: 0;
+  background-color: white;
+}
+
+th,
+td {
+  padding: 10px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.product-info {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.product-image {
+  width: 75px;
+  height: 75px;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+.product-name {
+  margin-right: 10px;
+}
