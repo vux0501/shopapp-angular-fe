@@ -1,27 +1,56 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HomeComponent } from './home/home.component';
-import { HeaderComponent } from './header/header.component';
-import { FooterComponent } from './footer/footer.component';
-import { OrderComponent } from './order/order.component';
-import { OrderConfirmComponent } from './order-confirm/order-confirm.component';
-import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
-import { DetailProductComponent } from './detail-product/detail-product.component';
+
+import { AppComponent } from './app/app.component';
+import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AppRoutingModule } from './app-routing.module';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { HomeComponent } from './components/home/home.component';
+import { HeaderComponent } from './components/header/header.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { DetailProductComponent } from './components/detail-product/detail-product.component';
+import { OrderComponent } from './components/order/order.component';
+import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
     HomeComponent,
     HeaderComponent,
     FooterComponent,
+    DetailProductComponent,
     OrderComponent,
-    OrderConfirmComponent,
     LoginComponent,
     RegisterComponent,
-    DetailProductComponent,
+
+    AppComponent,
   ],
-  imports: [BrowserModule],
-  providers: [],
-  bootstrap: [DetailProductComponent],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    BrowserModule,
+    FormsModule,
+    HttpClientModule,
+    AppRoutingModule,
+    NgbModule,
+  ],
+  providers: [
+    // {
+    //   provide: HTTP_INTERCEPTORS,
+    //   useClass: TokenInterceptor,
+    //   multi: true,
+    // },
+  ],
+  bootstrap: [
+    AppComponent,
+    // HomeComponent,
+    //DetailProductComponent,
+    // OrderComponent,
+    //OrderDetailComponent,
+    //LoginComponent,
+    // RegisterComponent
+  ],
 })
 export class AppModule {}
