@@ -7,21 +7,31 @@
       type="text"
       class="form-control search-input"
       placeholder="Tìm sản phẩm"
+      [(ngModel)]="keyword"
     />
-    <select class="form-control product-category" name="" id="">
-      <option selected disabled>Danh mục sản phẩm</option>
-      <option>Đồ điện tử</option>
-      <option>Đồ gia dụng</option>
-      <option>Bánh kẹo</option>
+    <select
+      class="form-control product-category"
+      [(ngModel)]="selectedCategoryId"
+    >
+      <option [value]="0">Tất cả</option>
+      <option *ngFor="let category of categories" [value]="category.id">
+        {{ category.name }}
+      </option>
     </select>
+    <button class="btn btn-primary" (click)="searchProducts()">Tìm kiếm</button>
   </div>
+
   <div class="row">
     <div class="col-lg-4 col-md-6" *ngFor="let product of products">
-      <div class="product-item">
-        <img [src]="product.url" alt="Product Image" class="product-image" />
+      <div class="product-item" (click)="onProductClick(product.id)">
+        <div class="product-image-container">
+          <img [src]="product.url" alt="Product Image" class="product-image" />
+        </div>
         <h3 class="product-name">{{ product.name }}</h3>
         <p class="product-description">{{ product.description }}</p>
-        <p class="product-price">Giá: ${{ product.price }}</p>
+        <p class="product-price">
+          Giá: {{ product.price | number : "1.0-0" }} VND
+        </p>
       </div>
     </div>
   </div>

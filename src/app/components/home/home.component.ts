@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { TokenService } from 'src/app/services/token.service';
 import { Product } from 'src/app/models/product';
 import { ProductService } from 'src/app/services/product.service';
+import { Category } from 'src/app/models/category';
+import { CategoryService } from 'src/app/services/category.service';
 
 @Component({
   selector: 'app-home',
@@ -17,40 +19,92 @@ export class HomeComponent implements OnInit {
   pages: number[] = [];
   totalPages: number = 0;
   visiblePages: number[] = [];
+  keyword: string = '';
+  categories: Category[] = [];
+  selectedCategoryId: number = 0;
 
-  constructor(private productService: ProductService) {}
+  constructor(
+    private productService: ProductService,
+    private categoryService: CategoryService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
-    this.getProducts(this.currentPage, this.itemsPerPage);
+    this.getProducts(
+      this.keyword,
+      this.selectedCategoryId,
+      this.currentPage,
+      this.itemsPerPage
+    );
+    this.getCategories(1, 100);
   }
 
-  getProducts(page: number, limit: number) {
-    debugger;
-    this.productService.getProducts(page - 1, limit).subscribe({
-      next: (response: any) => {
-        response.products.forEach((product: Product) => {
-          product.url = `${environment.apiBaseUrl}/products/images/${product.thumbnail}`;
-        });
-        this.products = response.products;
-        this.totalPages = response.totalPages;
-        this.visiblePages = this.generateVisiblePageArray(
-          this.currentPage,
-          this.totalPages
-        );
+  getCategories(page: number, limit: number) {
+    this.categoryService.getCategories(page, limit).subscribe({
+      next: (categories: Category[]) => {
+        debugger;
+        this.categories = categories;
       },
       complete: () => {
         debugger;
       },
       error: (error: any) => {
-        debugger;
-        console.error('Error fetching products:', error);
+        console.error('Error fetching categories:', error);
       },
     });
+  }
+
+  searchProducts() {
+    this.currentPage = 1;
+    this.itemsPerPage = 12;
+    debugger;
+    this.getProducts(
+      this.keyword,
+      this.selectedCategoryId,
+      this.currentPage,
+      this.itemsPerPage
+    );
+  }
+  getProducts(
+    keyword: string,
+    selectedCategoryId: number,
+    page: number,
+    limit: number
+  ) {
+    debugger;
+    this.productService
+      .getProducts(keyword, selectedCategoryId, page - 1, limit)
+      .subscribe({
+        next: (response: any) => {
+          debugger;
+          response.products.forEach((product: Product) => {
+            product.url = `${environment.apiBaseUrl}/products/images/${product.thumbnail}`;
+          });
+          this.products = response.products;
+          this.totalPages = response.totalPages;
+          this.visiblePages = this.generateVisiblePageArray(
+            this.currentPage,
+            this.totalPages
+          );
+        },
+        complete: () => {
+          debugger;
+        },
+        error: (error: any) => {
+          debugger;
+          console.error('Error fetching products:', error);
+        },
+      });
   }
   onPageChange(page: number) {
     debugger;
     this.currentPage = page;
-    this.getProducts(this.currentPage, this.itemsPerPage);
+    this.getProducts(
+      this.keyword,
+      this.selectedCategoryId,
+      this.currentPage,
+      this.itemsPerPage
+    );
   }
 
   generateVisiblePageArray(currentPage: number, totalPages: number): number[] {

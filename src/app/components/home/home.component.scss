@@ -32,16 +32,30 @@
 }
 .product-item {
   background-color: #f9f9f9;
-  border: 2px solid #1f2b37;
-  border-radius: 20px;
+  border-radius: 10px;
   padding: 20px;
   margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.product-item:hover {
+  cursor: pointer;
+  background-color: #f9f9f9a4;
 }
 .product-image {
   width: 100%;
-  height: auto;
+  height: 100%;
   margin-bottom: 10px;
 }
+
+.product-image-container {
+  width: 200px;
+  height: 200px;
+}
+
 .product-name {
   color: #352f44;
 }

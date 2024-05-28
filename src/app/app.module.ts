@@ -15,6 +15,7 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './interceptors/token.interceptors';
+import { DecimalPipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { TokenInterceptor } from './interceptors/token.interceptors';
       useClass: TokenInterceptor,
       multi: true,
     },
+    DecimalPipe,
   ],
   bootstrap: [
     AppComponent,
