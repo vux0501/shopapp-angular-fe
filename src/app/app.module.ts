@@ -26,7 +26,6 @@ import { DecimalPipe } from '@angular/common';
     OrderComponent,
     LoginComponent,
     RegisterComponent,
-
     AppComponent,
   ],
   imports: [

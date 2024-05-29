@@ -1,63 +1,36 @@
 <app-header></app-header>
 <div class="container">
-  <div class="intro-section"><h1>Chi tiết sản phẩm</h1></div>
-  <div class="row">
+  <div class="intro-section">
+    <h1>Chi tiết sản phẩm</h1>
+  </div>
+  <div class="row detail-container">
     <div class="col-md-6">
       <div
-        id="carouselExampleIndicators"
-        class="carousel slide"
+        id="carouselExample"
+        class="carousel slide carousel-container"
         data-bs-ride="carousel"
       >
-        <div class="carousel-indicators">
-          <button
-            type="button"
-            data-bs-target="#carouselExampleIndicators"
-            data-bs-slide-to="0"
-            class="active"
-            aria-current="true"
-            aria-label="Slide 1"
-          ></button>
-          <button
-            type="button"
-            data-bs-target="#carouselExampleIndicators"
-            data-bs-slide-to="1"
-            aria-label="Slide 2"
-          ></button>
-          <button
-            type="button"
-            data-bs-target="#carouselExampleIndicators"
-            data-bs-slide-to="2"
-            aria-label="Slide 3"
-          ></button>
-        </div>
         <div class="carousel-inner">
-          <div class="carousel-item active">
-            <img
-              src="https://cdn.hoanghamobile.com/i/preview/Uploads/2023/09/13/iphone-15-pro-natural-titanium-pure-back-iphone-15-pro-natural-titanium-pure-front-2up-screen-usen.png"
-              class="d-block w-100"
-              alt="..."
-            />
-          </div>
-          <div class="carousel-item">
-            <img
-              src="https://cdn.hoanghamobile.com/i/preview/Uploads/2023/09/13/iphone-15-pro-natural-titanium-pure-back-iphone-15-pro-natural-titanium-pure-front-2up-screen-usen.png"
-              class="d-block w-100"
-              alt="..."
-            />
-          </div>
-          <div class="carousel-item">
-            <img
-              src="https://cdn.hoanghamobile.com/i/preview/Uploads/2023/09/13/iphone-15-pro-natural-titanium-pure-back-iphone-15-pro-natural-titanium-pure-front-2up-screen-usen.png"
-              class="d-block w-100"
-              alt="..."
-            />
+          <div
+            *ngFor="let image of product?.product_images; let i = index"
+            class="carousel-item"
+            [ngClass]="{ active: i === currentImageIndex }"
+          >
+            <div class="square-image">
+              <img
+                [src]="image.image_url"
+                class="product-image"
+                alt="Product Image"
+              />
+            </div>
           </div>
         </div>
         <button
           class="carousel-control-prev"
           type="button"
-          data-bs-target="#carouselExampleIndicators"
+          data-bs-target="#carouselExample"
           data-bs-slide="prev"
+          (click)="previousImage()"
         >
           <span class="carousel-control-prev-icon" aria-hidden="true"></span>
           <span class="visually-hidden">Previous</span>
@@ -65,8 +38,9 @@
         <button
           class="carousel-control-next"
           type="button"
-          data-bs-target="#carouselExampleIndicators"
+          data-bs-target="#carouselExample"
           data-bs-slide="next"
+          (click)="nextImage()"
         >
           <span class="carousel-control-next-icon" aria-hidden="true"></span>
           <span class="visually-hidden">Next</span>
@@ -74,39 +48,16 @@
       </div>
       <div class="row">
         <div class="thumbnail-container">
-          <div class="thumbnail-item active">
+          <div
+            *ngFor="let image of product?.product_images; let i = index"
+            class="thumbnail-item"
+            [ngClass]="{ active: i === currentImageIndex }"
+            (click)="thumbnailClick(i)"
+          >
             <img
-              src="https://cdn.hoanghamobile.com/i/preview/Uploads/2023/09/13/iphone-15-pro-natural-titanium-pure-back-iphone-15-pro-natural-titanium-pure-front-2up-screen-usen.png"
-              alt="image"
+              [src]="image.image_url"
               class="thumbnail-image"
-            />
-          </div>
-          <div class="thumbnail-item">
-            <img
-              src="https://cdn.hoanghamobile.com/i/preview/Uploads/2023/09/13/iphone-15-pro-natural-titanium-pure-back-iphone-15-pro-natural-titanium-pure-front-2up-screen-usen.png"
-              alt="image"
-              class="thumbnail-image"
-            />
-          </div>
-          <div class="thumbnail-item">
-            <img
-              src="https://cdn.hoanghamobile.com/i/preview/Uploads/2023/09/13/iphone-15-pro-natural-titanium-pure-back-iphone-15-pro-natural-titanium-pure-front-2up-screen-usen.png"
-              alt="image"
-              class="thumbnail-image"
-            />
-          </div>
-          <div class="thumbnail-item">
-            <img
-              src="https://cdn.hoanghamobile.com/i/preview/Uploads/2023/09/13/iphone-15-pro-natural-titanium-pure-back-iphone-15-pro-natural-titanium-pure-front-2up-screen-usen.png"
-              alt="image"
-              class="thumbnail-image"
-            />
-          </div>
-          <div class="thumbnail-item">
-            <img
-              src="https://cdn.hoanghamobile.com/i/preview/Uploads/2023/09/13/iphone-15-pro-natural-titanium-pure-back-iphone-15-pro-natural-titanium-pure-front-2up-screen-usen.png"
-              alt="image"
-              class="thumbnail-image"
+              alt="Thumbnail Image"
             />
           </div>
         </div>
@@ -114,18 +65,20 @@
     </div>
     <div class="col-md-6">
       <div class="product-details">
-        <h2>Thông tin chi tiết sản phẩm</h2>
-        <p>Mô tả sản phẩm</p>
-        <p>Giá: $99</p>
+        <h2>{{ product?.name }}</h2>
+        <p>Mô tả: {{ product?.description }}</p>
+        <p>Giá: {{ product?.price | number : "1.0-0" }} VND</p>
         <div class="product-quantity">
           <div class="border-wrapper">
-            <button>-</button>
-            <input type="text" value="1" />
-            <button>+</button>
+            <button (click)="decreaseQuantity()">-</button>
+            <input type="text" [value]="quantity" />
+            <button (click)="increaseQuantity()">+</button>
           </div>
         </div>
         <div class="product-actions">
-          <button class="btn btn-primary">Thêm vào giỏ hàng</button>
+          <button class="btn btn-primary" (click)="addToCart()">
+            Thêm vào giỏ hàng
+          </button>
           <button class="btn btn-success">Mua ngay</button>
         </div>
       </div>

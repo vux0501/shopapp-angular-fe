@@ -25,4 +25,13 @@ export class ProductService {
       .set('limit', limit.toString());
     return this.http.get<Product[]>(this.apiGetProducts, { params });
   }
+  getDetailProduct(productId: number) {
+    return this.http.get(`${environment.apiBaseUrl}/products/${productId}`);
+  }
+  getProductsByIds(productIds: number[]): Observable<Product[]> {
+    const params = new HttpParams().set('ids', productIds.join(','));
+    return this.http.get<Product[]>(`${this.apiGetProducts}/by-ids`, {
+      params,
+    });
+  }
 }

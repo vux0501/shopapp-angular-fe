@@ -122,4 +122,8 @@ export class HomeComponent implements OnInit {
       .fill(0)
       .map((_, index) => startPage + index);
   }
+
+  onProductClick(productId: number) {
+    this.router.navigate(['/products', productId]);
+  }
 }
