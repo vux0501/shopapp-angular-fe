@@ -16,6 +16,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './interceptors/token.interceptors';
 import { DecimalPipe } from '@angular/common';
+import { OrderConfirmComponent } from './components/order-confirm/order-confirm.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { DecimalPipe } from '@angular/common';
     FooterComponent,
     DetailProductComponent,
     OrderComponent,
+    OrderConfirmComponent,
     LoginComponent,
     RegisterComponent,
     AppComponent,
