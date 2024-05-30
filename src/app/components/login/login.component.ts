@@ -66,7 +66,7 @@ export class LoginComponent {
       next: (response: LoginResponse) => {
         debugger;
         const { token } = response;
-        console.log(response);
+        this.tokenService.setToken(token);
       },
       complete: () => {
         debugger;

@@ -1,5 +1,12 @@
+@import "../../styles/shared-styles.scss";
+
 .container {
   color: rgb(0, 0, 0);
+}
+.intro-section {
+  color: $shopapp-title-color;
+  padding: 20px;
+  text-align: center;
 }
 .confirmation-container {
   margin: 50px auto;
@@ -21,7 +28,7 @@
 }
 
 .product-name {
-  color: rgb(0, 0, 0);
+  color: black;
   margin-right: 10px;
 }
 table {
@@ -30,8 +37,6 @@ table {
   border: none;
   border-collapse: separate;
   border-spacing: 0;
-  background-color: white;
-  color: black;
 }
 
 th,
@@ -40,7 +45,7 @@ td {
   text-align: center;
 }
 .btn-gradient {
-  background: black;
+  background: linear-gradient(to right, $shopapp-tint-color, $shopapp-color);
   color: white;
   border-radius: 30px;
   width: 200px;
