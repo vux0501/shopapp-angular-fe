@@ -1,0 +1,52 @@
+.left {
+  display: flex;
+}
+
+.right {
+  display: flex;
+}
+
+.containerlr {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.navbar {
+  background-color: rgb(255, 255, 255) !important;
+}
+
+.navbar .container {
+  background-color: rgba(250, 246, 246, 0) !important;
+}
+
+.navbar .container .navbar-brand {
+  color: rgb(0, 0, 0);
+}
+
+.navbar .container .navbar-nav .nav-link {
+  color: rgb(0, 0, 0);
+  padding: 8px 16px;
+  background-color: rgba(255, 255, 255, 0);
+}
+
+.navbar .container .navbar-nav .nav-link:hover {
+  color: rgba(0, 0, 0, 0.568);
+  padding: 8px 16px;
+}
+
+.popover-list {
+}
+.popover-body {
+  padding: 0px;
+}
+.popover-item {
+  display: block;
+  padding: 10px 0px;
+  text-decoration: none;
+  color: #000000;
+}
+
+.popover-item:hover {
+  color: rgb(0, 204, 255);
+}

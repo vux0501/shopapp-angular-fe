@@ -8,6 +8,8 @@ import { OrderDTO } from '../../dtos/order/order.dto';
 import { validate, ValidationError } from 'class-validator';
 import { ValidationException } from '../../exceptions/ValidationException';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { TokenService } from 'src/app/services/token.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-order',
@@ -20,7 +22,7 @@ export class OrderComponent implements OnInit {
   couponCode: string = ''; // Mã giảm giá
   totalAmount: number = 0; // Tổng tiền
   orderData: OrderDTO = {
-    user_id: 1, // Thay bằng user_id thích hợp
+    user_id: 0, // Thay bằng user_id thích hợp
     fullname: '', // Khởi tạo rỗng, sẽ được điền từ form
     email: '', // Khởi tạo rỗng, sẽ được điền từ form
     phone_number: '', // Khởi tạo rỗng, sẽ được điền từ form
@@ -37,7 +39,9 @@ export class OrderComponent implements OnInit {
     private cartService: CartService,
     private productService: ProductService,
     private orderService: OrderService,
-    private fb: FormBuilder
+    private tokenService: TokenService,
+    private fb: FormBuilder,
+    private router: Router
   ) {
     this.orderForm = this.fb.group({
       fullname: ['', Validators.required],
@@ -53,11 +57,15 @@ export class OrderComponent implements OnInit {
   ngOnInit(): void {
     // Lấy danh sách sản phẩm từ giỏ hàng
     debugger;
+    this.orderData.user_id = this.tokenService.getUserId();
     const cart = this.cartService.getCart();
     const productIds = Array.from(cart.keys()); // Chuyển danh sách ID từ Map giỏ hàng
 
     // Gọi service để lấy thông tin sản phẩm dựa trên danh sách ID
     debugger;
+    if (productIds.length === 0) {
+      return;
+    }
     this.productService.getProductsByIds(productIds).subscribe({
       next: (products) => {
         debugger;
@@ -100,7 +108,9 @@ export class OrderComponent implements OnInit {
       this.orderService.placeOrder(this.orderData).subscribe({
         next: (response) => {
           debugger;
-          console.log('Đặt hàng thành công');
+          alert('Đặt hàng thành công');
+          this.cartService.clearCart();
+          this.router.navigate(['/']);
         },
         complete: () => {
           debugger;
