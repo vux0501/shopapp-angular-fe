@@ -39,7 +39,6 @@
               >
                 <a
                   class="nav-link"
-                  routerLink="/profile"
                   [ngbPopover]="popoverContent"
                   (click)="togglePopover($event)"
                 >
@@ -50,19 +49,19 @@
                     <a
                       href="#"
                       class="popover-item"
-                      (click)="handleItemClick(0)"
+                      (click)="handleItemClick($event, 0)"
                       >Tài khoản của tôi</a
                     >
                     <a
                       href="#"
                       class="popover-item"
-                      (click)="handleItemClick(1)"
+                      (click)="handleItemClick($event, 1)"
                       >Đơn mua</a
                     >
                     <a
                       href="#"
                       class="popover-item"
-                      (click)="handleItemClick(2)"
+                      (click)="handleItemClick($event, 2)"
                       >Đăng xuất</a
                     >
                   </div>

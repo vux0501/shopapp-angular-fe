@@ -17,6 +17,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './interceptors/token.interceptors';
 import { DecimalPipe } from '@angular/common';
 import { OrderDetailComponent } from './components/detail-order/order.detail.component';
+import { UserProfileComponent } from './components/user-profile/user.profile.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { OrderDetailComponent } from './components/detail-order/order.detail.com
     OrderDetailComponent,
     LoginComponent,
     RegisterComponent,
+    UserProfileComponent,
     AppComponent,
   ],
   imports: [

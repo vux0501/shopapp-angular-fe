@@ -1,0 +1,32 @@
+@import "../../styles/shared-styles.scss";
+
+.container {
+  color: black;
+}
+.intro-section {
+  color: $shopapp-title-color;
+  padding: 20px;
+  text-align: center;
+}
+.product-header {
+  color: $shopapp-tint-color;
+}
+.form-control {
+  background-color: white;
+  border: 1px solid rgb(29, 33, 54);
+  color: black;
+}
+
+.form-control:focus {
+  border-color: rgb(0, 0, 0);
+  background-color: white;
+}
+.form-label {
+  color: black;
+}
+.product-header {
+  color: $shopapp-tint-color;
+}
+.product-order {
+  color: $shopapp-title-color;
+}
